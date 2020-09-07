@@ -18,6 +18,7 @@ jobs:
         name: build
         inputs:
           script: |
+            echo $HOME
             ls -al
             yes | bash ./s/.install/linux/faceswap_setup_x64.sh
             ls -al ./s
