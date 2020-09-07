@@ -125,7 +125,7 @@ ask_yesno () {
 ask_version() {
     # Ask which version of faceswap to install
     while true; do
-        default=1
+        default=3
         read -rp $'\e[36m'"Select: 1 (NVIDIA), 2 (AMD), 3 (CPU) [default: $default]: "$'\e[97m' vers
         vers="${vers:-${default}}"
         case $vers in
