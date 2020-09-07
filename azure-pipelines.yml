@@ -19,9 +19,9 @@ jobs:
         inputs:
           script: |
             ls -al
-            yes | bash ./.install/linux/faceswap_setup_x64.sh
-            ls -al
-            ls -al ../
-          workingDirectory: '$(Agent.BuildDirectory)/s'
+            yes | bash ./s/.install/linux/faceswap_setup_x64.sh
+            ls -al ./s
+            ls -al ./y
+          workingDirectory: '$(Agent.BuildDirectory)'
 
 
