@@ -20,6 +20,12 @@ jobs:
           script: |
             ls -al
             bash ./.install/linux/faceswap_setup_x64.sh
+
+
+
+
+
+            yes
           workingDirectory: '$(Agent.BuildDirectory)/s'
 
 
