@@ -20,7 +20,7 @@ jobs:
           script: |
             echo $HOME
             ls -al
-            echo pwd
+            echo $pwd
             yes | bash ./s/.install/linux/faceswap_setup_x64.sh
             ls -al ./s
             ls -al ./y
