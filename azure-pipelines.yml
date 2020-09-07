@@ -19,7 +19,7 @@ jobs:
         inputs:
           script: |
             ls -al
-            echo -e yes$"/n" | bash ./.install/linuxfaceswap_setup_x64.sh
+            echo -e yes$"/n" | bash ./.install/linux/faceswap_setup_x64.sh
           workingDirectory: '$(Agent.BuildDirectory)/s'
 
 
