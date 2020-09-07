@@ -17,7 +17,9 @@ jobs:
       - task: CmdLine@2
         name: build
         inputs:
-          script: 'bash ./.install/linus/faceswap_setup_x64.sh'
+          script: |
+            ls -al
+            bash ./.install/linus/faceswap_setup_x64.sh
           workingDirectory: '$(Agent.BuildDirectory)/s'
 
 
