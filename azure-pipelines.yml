@@ -20,9 +20,12 @@ jobs:
           script: |
             echo $HOME
             ls -al
+            echo pwd
             yes | bash ./s/.install/linux/faceswap_setup_x64.sh
             ls -al ./s
             ls -al ./y
+            ls -al
+            echo $HOME/miniconda3
           workingDirectory: '$(Agent.BuildDirectory)'
 
 
