@@ -173,7 +173,7 @@ find_conda_install() {
 set_conda_dir_from_bin() {
     # Set the DIR_CONDA variable from the bin file
     DIR_CONDA=$(readlink -f "$(dirname "$1")/..")
-    info "Found existing conda install at: $DIR_CONDA"
+    info "Found existing conda install at: $HOME/miniconda3"
 }
 
 check_conda_path()  {
@@ -231,13 +231,13 @@ conda_opts () {
     header "CONDA"
     info "Faceswap uses Conda as it handles the installation of all prerequisites."
     if find_conda_install && ask_yesno "Use the pre installed conda?" "Yes"; then
-        info "Using Conda install at $DIR_CONDA"
+        info "Using Conda install at $HOME/miniconda3"
     else
         info "If you have an existing Conda install then enter the location here,\
         otherwise Miniconda3 will be installed in the given location."
         err_msg="The location for Conda must not contain spaces (this is a specific\
         limitation of Conda)."
-        tmp_dir_conda="$DIR_CONDA"
+        tmp_dir_conda="$HOME/miniconda3"
         while true ; do
             ask "Please specify a location for Conda." "DIR_CONDA"
             case ${DIR_CONDA} in
@@ -290,11 +290,11 @@ review() {
     header "Review install options"
     info "Please review the selected installation options before proceeding:"
     echo ""
-    if ! check_folder_exists "$DIR_CONDA"
+    if ! check_folder_exists "$HOME/miniconda3"
         then
-            echo "        - MiniConda3 will be installed in '$DIR_CONDA'"
+            echo "        - MiniConda3 will be installed in '$HOME/miniconda3'"
         else
-            echo "        - Existing Conda install at '$DIR_CONDA' will be used"
+            echo "        - Existing Conda install at '$HOME/miniconda3' will be used"
     fi
     if $CONDA_TO_PATH ; then echo "        - MiniConda3 will be added to your PATH" ; fi
     if check_env_exists ; then
@@ -312,12 +312,12 @@ review() {
 
 conda_install() {
     # Download and install Mini Conda3
-    if ! check_folder_exists "$DIR_CONDA" ; then
+    if ! check_folder_exists "$HOME/miniconda3" ; then
         info "Downloading Miniconda3..."
         yellow ; download_file $DL_CONDA
         info "Installing Miniconda3..."
         yellow ; fname="$(basename -- $DL_CONDA)"
-        bash "$TMP_DIR/$fname" -b -p "$DIR_CONDA"
+        bash "$TMP_DIR/$fname" -b -p "$HOME/miniconda3"
         if $CONDA_TO_PATH ; then
             info "Adding Miniconda3 to PATH..."
             yellow ; "$CONDA_EXECUTABLE" init
@@ -353,7 +353,7 @@ create_env() {
 activate_env() {
     # Activate the conda environment
     # shellcheck source=/dev/null
-    source "$DIR_CONDA/etc/profile.d/conda.sh" activate
+    source "$HOME/miniconda3/etc/profile.d/conda.sh" activate
     conda activate "$ENV_NAME"
 }
 
@@ -388,7 +388,7 @@ setup_faceswap() {
 create_gui_launcher () {
     # Create a shortcut to launch into the GUI
     launcher="$DIR_FACESWAP/faceswap_gui_launcher.sh"
-    launch_script="source \"$DIR_CONDA/etc/profile.d/conda.sh\" activate &&\n"
+    launch_script="source \"$HOME/miniconda3/etc/profile.d/conda.sh\" activate &&\n"
     launch_script+="conda activate '$ENV_NAME' &&\n"
     launch_script+="python \"$DIR_FACESWAP/faceswap.py\" gui\n"
     echo -e "$launch_script" > "$launcher"
